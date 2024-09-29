@@ -7,7 +7,9 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	for segment in tether_segments:
-		print(segment.position)
+		#print(segment.position)
+		pass
+
 func generate_tether() -> void:
 	var previous_point = $TetherBase
 	var tether_segment = load("res://scenes/TetherSegment.tscn")
@@ -16,12 +18,13 @@ func generate_tether() -> void:
 		var tether_segment_instance = tether_segment.instantiate()
 		tether_segment_instance.get_node("SegmentPinJoint").node_a = previous_point.get_path()
 		add_child(tether_segment_instance)
-		offset += 1
-		tether_segment_instance.transform = Transform2D(0.0, Vector2(0, offset))
+		offset += 2
+		tether_segment_instance.transform = Transform2D(0.0, Vector2(offset, 0))
 		tether_segments.append(tether_segment_instance)
 		previous_point = tether_segment_instance
-	for segment in tether_segments:
-		print(segment.position)
+	$TetherHead.transform = Transform2D(0.0, Vector2(0, 0))
+	$TetherHead/HeadToSegmentPinJoint.node_a = previous_point.get_path()
+
 	
 	
 	

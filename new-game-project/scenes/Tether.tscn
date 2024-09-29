@@ -5,11 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://v254aumms2qm" path="res://icon.svg" id="1_ejcpe"]
 [ext_resource type="Script" path="res://scripts/TetherHead.gd" id="3_5bp1m"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wfin0"]
-radius = 5.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_qmrso"]
 radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wfin0"]
+radius = 5.0
 
 [node name="Tether" type="StaticBody2D"]
 script = ExtResource("1_723x6")
@@ -27,18 +27,21 @@ script = ExtResource("3_5bp1m")
 scale = Vector2(0.046875, 0.046875)
 texture = ExtResource("1_ejcpe")
 
-[node name="HeadPinJoint" type="PinJoint2D" parent="TetherHead"]
+[node name="HeadToPlayerPinJoint" type="PinJoint2D" parent="TetherHead"]
 scale = Vector2(0.25, 0.25)
-node_a = NodePath("..")
+node_b = NodePath("..")
+
+[node name="HeadToSegmentPinJoint" type="PinJoint2D" parent="TetherHead"]
+position = Vector2(-3, 0)
+
+[node name="HeadCollider" type="CollisionShape2D" parent="TetherHead" groups=["TetherHead"]]
+shape = SubResource("CircleShape2D_qmrso")
 
 [node name="HeadArea" type="Area2D" parent="TetherHead"]
 collision_layer = 4
 
 [node name="HeadAreaCollider" type="CollisionShape2D" parent="TetherHead/HeadArea"]
 shape = SubResource("CircleShape2D_wfin0")
-
-[node name="HeadCollider" type="CollisionShape2D" parent="TetherHead" groups=["TetherHead"]]
-shape = SubResource("CircleShape2D_qmrso")
 
 [connection signal="area_entered" from="TetherHead/HeadArea" to="TetherHead" method="_on_head_area_area_entered"]
 [connection signal="body_entered" from="TetherHead/HeadArea" to="TetherHead" method="_on_head_area_body_entered"]

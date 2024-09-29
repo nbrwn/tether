@@ -9,6 +9,7 @@ height = 16.0
 [node name="TetherSegment" type="RigidBody2D"]
 show_behind_parent = true
 visibility_layer = 2
+rotation = 1.5708
 collision_layer = 4
 collision_mask = 2
 mass = 0.01
