@@ -18,11 +18,12 @@ func generate_tether() -> void:
 		var tether_segment_instance = tether_segment.instantiate()
 		tether_segment_instance.get_node("SegmentPinJoint").node_a = previous_point.get_path()
 		add_child(tether_segment_instance)
-		offset += 2
+		offset += 10
 		tether_segment_instance.transform = Transform2D(0.0, Vector2(offset, 0))
+		tether_segment_instance.rotation_degrees = 90
 		tether_segments.append(tether_segment_instance)
 		previous_point = tether_segment_instance
-	$TetherHead.transform = Transform2D(0.0, Vector2(0, 0))
+	$TetherHead.transform = Transform2D(0.0, Vector2(offset + 10, 0))
 	$TetherHead/HeadToSegmentPinJoint.node_a = previous_point.get_path()
 
 	

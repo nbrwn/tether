@@ -33,6 +33,7 @@ node_b = NodePath("..")
 
 [node name="HeadToSegmentPinJoint" type="PinJoint2D" parent="TetherHead"]
 position = Vector2(-3, 0)
+node_b = NodePath("..")
 
 [node name="HeadCollider" type="CollisionShape2D" parent="TetherHead" groups=["TetherHead"]]
 shape = SubResource("CircleShape2D_qmrso")
