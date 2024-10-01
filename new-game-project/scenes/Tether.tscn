@@ -16,11 +16,13 @@ script = ExtResource("1_723x6")
 metadata/max_tether_length = 10
 
 [node name="TetherBase" parent="." instance=ExtResource("1_0asnj")]
+z_index = -2
 
 [node name="TetherHead" type="RigidBody2D" parent="." groups=["TetherHead"]]
 position = Vector2(80, 0)
 collision_layer = 4
 collision_mask = 2
+mass = 0.1
 script = ExtResource("3_5bp1m")
 
 [node name="HeadSprite" type="Sprite2D" parent="TetherHead"]
@@ -29,7 +31,7 @@ texture = ExtResource("1_ejcpe")
 
 [node name="HeadToPlayerPinJoint" type="PinJoint2D" parent="TetherHead"]
 scale = Vector2(0.25, 0.25)
-node_b = NodePath("..")
+node_a = NodePath("..")
 
 [node name="HeadToSegmentPinJoint" type="PinJoint2D" parent="TetherHead"]
 position = Vector2(-3, 0)
