@@ -1,5 +1,5 @@
 extends StaticBody2D
-@export var max_tether_length = 20
+@export var max_tether_length = 40
 var tether_segments = []
 var tether_segment = preload("res://scenes/TetherSegment.tscn")
 
@@ -13,8 +13,8 @@ func _process(delta: float) -> void:
 
 func generate_tether() -> void:
 	var previous_point = $TetherBase
-	var offset = 4
-	var step = 8
+	var offset = 0
+	var step = 4
 	for i in max_tether_length:
 		#Create new tether_segment
 		var tether_segment_instance = tether_segment.instantiate()
@@ -22,7 +22,7 @@ func generate_tether() -> void:
 		add_child(tether_segment_instance)
 		
 		#Move, Rotate, Pin new tether_segment
-		tether_segment_instance.rotation_degrees = -90
+		#tether_segment_instance.rotation_degrees = -90
 		tether_segment_instance.position = Vector2(offset, 0)
 		tether_segment_instance.get_node("SegmentPinJoint").node_a = previous_point.get_path()
 		
