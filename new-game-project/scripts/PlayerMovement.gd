@@ -1,4 +1,21 @@
-extends CharacterBody2D
+extends RigidBody2D
+
+const SPEED = 130.0
+const JUMP_VELOCITY = -300.0
+
+func _integrate_forces(state):
+	print("hello")
+	var direction := Input.get_axis("ui_left", "ui_right")
+	print(direction)
+	if direction != 0:
+		apply_central_force(direction * SPEED * Vector2.RIGHT * state.get_step())
+	
+	# Handle jump.
+	if Input.is_action_just_pressed("ui_accept"):
+		apply_impulse(Vector2.ZERO,  direction* JUMP_VELOCITY *Vector2.RIGHT*state.get_step())
+
+
+"""extends CharacterBody2D
 
 
 const SPEED = 130.0
@@ -27,4 +44,4 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	move_and_slide()
+	move_and_slide()"""

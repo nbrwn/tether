@@ -23,6 +23,8 @@ position = Vector2(80, 0)
 collision_layer = 4
 collision_mask = 2
 mass = 0.1
+linear_damp = 10.0
+angular_damp = 10.0
 script = ExtResource("3_5bp1m")
 
 [node name="HeadSprite" type="Sprite2D" parent="TetherHead"]
