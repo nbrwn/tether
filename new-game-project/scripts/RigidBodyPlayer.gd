@@ -1,12 +1,14 @@
 extends RigidBody2D
 
-@onready var move_right_force = Vector2(1500, 0)
-@onready var move_left_force = Vector2(-1500, 0)
+@onready var move_right_force = Vector2(1, 0)
+@onready var move_left_force = Vector2(-1, 0)
 @onready var move_speed_max = 140
-@onready var jump_force = Vector2(0, -18000)
+@onready var jump_force = Vector2(0, -1)
 
 @onready var ray_right_foot = $RayRightFoot
 @onready var ray_left_foot = $RayLeftFoot
+
+@onready var tether_attached = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,3 +26,7 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("jump") and (ray_left_foot.is_colliding() or ray_right_foot.is_colliding()):
 		self.apply_impulse(jump_force, Vector2(0, 0))
+		
+	if Input.is_action_pressed("debug_change_speed"):
+		self.move_right_force = Vector2(20, 0)
+		self.move_left_force = Vector2(-20, 0)

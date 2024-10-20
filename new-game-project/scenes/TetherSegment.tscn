@@ -50,3 +50,4 @@ shape = SubResource("CapsuleShape2D_i8x22")
 [node name="SegmentPinJoint" type="PinJoint2D" parent="."]
 scale = Vector2(0.4, 0.4)
 node_b = NodePath("..")
+bias = 0.9

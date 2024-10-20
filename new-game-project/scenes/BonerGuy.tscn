@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://5racmidg584n"]
+[gd_scene load_steps=9 format=3 uid="uid://c2afqahqhkb73"]
 
 [ext_resource type="Script" path="res://scripts/RigidBodyPlayer.gd" id="1_ascln"]
 [ext_resource type="Texture2D" uid="uid://d1hemqqd3vlq8" path="res://assets/sprites/knight.png" id="2_j475c"]
@@ -44,7 +44,7 @@ radius = 5.0
 height = 16.0
 
 [node name="RigidBodyChar" type="RigidBody2D"]
-mass = 65.0
+mass = 0.011
 lock_rotation = true
 script = ExtResource("1_ascln")
 

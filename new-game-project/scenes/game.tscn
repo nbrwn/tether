@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bfchjct3sumiv" path="res://assets/sprites/world_tileset.png" id="2_2f0vd"]
 [ext_resource type="PackedScene" uid="uid://q380q4k2slq8" path="res://scenes/Tether.tscn" id="3_3i6gi"]
-[ext_resource type="PackedScene" uid="uid://5racmidg584n" path="res://scenes/BonerGuy.tscn" id="4_aov34"]
+[ext_resource type="PackedScene" uid="uid://c2afqahqhkb73" path="res://scenes/BonerGuy.tscn" id="4_aov34"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0f4j"]
 texture = ExtResource("2_2f0vd")
@@ -173,14 +173,13 @@ sources/0 = SubResource("TileSetAtlasSource_e0f4j")
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_0qfqd")
 format = 2
-layer_0/tile_data = PackedInt32Array(65535, 0, 0, 65534, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, -131063, 0, 0, -131062, 0, 0, -131061, 0, 0, -131060, 0, 0, 65526, 0, 0, 65527, 0, 0, 65528, 0, 0, 65529, 0, 0, 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 65525, 0, 0, 65524, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0, 25, 0, 0, 26, 0, 0, 27, 0, 0, 28, 0, 0, 29, 0, 0)
+layer_0/tile_data = PackedInt32Array(65535, 0, 0, 65534, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 65526, 0, 0, 65527, 0, 0, 65528, 0, 0, 65529, 0, 0, 65530, 0, 0, 65531, 0, 0, 65532, 0, 0, 65533, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 65525, 0, 0, 65524, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0, 25, 0, 0, 26, 0, 0, 27, 0, 0, 28, 0, 0, 29, 0, 0)
 
 [node name="Tether" parent="." instance=ExtResource("3_3i6gi")]
 visibility_layer = 2
 z_index = -1
 z_as_relative = false
 position = Vector2(0, -12)
-collision_layer = 4
 collision_mask = 3
 
 [node name="RigidBodyChar" parent="." instance=ExtResource("4_aov34")]
@@ -188,5 +187,5 @@ position = Vector2(-92, -47)
 collision_mask = 3
 
 [node name="Camera2D" type="Camera2D" parent="RigidBodyChar"]
-zoom = Vector2(8, 8)
+zoom = Vector2(4, 4)
 position_smoothing_enabled = true
