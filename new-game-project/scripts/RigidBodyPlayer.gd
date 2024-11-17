@@ -9,7 +9,9 @@ extends RigidBody2D
 
 @onready var stuck_on_left_wall = false
 @onready var stuck_on_right_wall = false
+@onready var stuck_on_floor = false
 
+@onready var ray_floor_check = $Rays/RayFloorCheck
 @onready var ray_left_foot = $Rays/RayLeftFoot
 @onready var ray_right_foot = $Rays/RayRightFoot
 @onready var ray_top_left_side = $Rays/RayTopLeftSide
@@ -34,6 +36,9 @@ func _process(delta: float) -> void:
 	if stuck_on_right_wall:
 		self.apply_impulse(move_left_force, Vector2(0, 0))
 	
+	if stuck_on_floor:
+		self.apply_impulse(Vector2(0, -500), Vector2(0, 0))
+	
 func process_input():
 	if Input.is_action_pressed("move_right") and self.linear_velocity.x < move_speed_max:
 		self.apply_impulse(move_right_force, Vector2(0, 0))
@@ -52,6 +57,7 @@ func set_state():
 	
 	stuck_on_left_wall = (not is_on_floor()) and (ray_top_left_side.is_colliding() or ray_bottom_left_side.is_colliding())
 	stuck_on_right_wall = (not is_on_floor()) and (ray_top_right_side.is_colliding() or ray_bottom_right_side.is_colliding())
+	stuck_on_floor = ray_floor_check.is_colliding()
 
 func is_on_floor():
 	return ray_left_foot.is_colliding() or ray_right_foot.is_colliding()
