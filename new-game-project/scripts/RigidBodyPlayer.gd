@@ -1,7 +1,9 @@
 extends RigidBody2D
 
-@onready var move_right_force = Vector2(1500, 0)
-@onready var move_left_force = Vector2(-1500, 0)
+@onready var screen_resolution = DisplayServer.window_get_size()
+
+@onready var move_right_force = Vector2(750, 0)
+@onready var move_left_force = Vector2(-750, 0)
 @onready var move_speed_max = 140
 
 @onready var jump_force = Vector2(0, -18000)
@@ -19,6 +21,9 @@ extends RigidBody2D
 @onready var ray_bottom_left_side = $Rays/RayBottomLeftSide
 @onready var ray_bottom_right_side = $Rays/RayBottomRightSide
 
+var coyote_count = 0
+var coyote_frames = 60
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -27,23 +32,24 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	set_state()
+	print(can_jump)
+	
+	if stuck_on_left_wall:
+		self.apply_impulse(Vector2(100, 0), Vector2(0, 0))
+	
+	if stuck_on_right_wall:
+		self.apply_impulse(Vector2(-100, 0), Vector2(0, 0))
+	
+	if stuck_on_floor:
+		self.apply_impulse(Vector2(0, -250), Vector2(0, 0))
 	
 	process_input()
 	
-	if stuck_on_left_wall:
-		self.apply_impulse(move_right_force, Vector2(0, 0))
-	
-	if stuck_on_right_wall:
-		self.apply_impulse(move_left_force, Vector2(0, 0))
-	
-	if stuck_on_floor:
-		self.apply_impulse(Vector2(0, -500), Vector2(0, 0))
-	
 func process_input():
-	if Input.is_action_pressed("move_right") and self.linear_velocity.x < move_speed_max:
+	if Input.is_action_pressed("move_right") and self.linear_velocity.x < move_speed_max and !stuck_on_right_wall:
 		self.apply_impulse(move_right_force, Vector2(0, 0))
 	
-	if Input.is_action_pressed("move_left") and self.linear_velocity.x > -move_speed_max:
+	if Input.is_action_pressed("move_left") and self.linear_velocity.x > -move_speed_max and !stuck_on_left_wall:
 		self.apply_impulse(move_left_force, Vector2(0, 0))
 	
 	if Input.is_action_just_pressed("jump") and can_jump:
@@ -53,7 +59,14 @@ func set_state():
 	
 	# TODO - Implement Coyote Time here
 	# Maybe by doing a counter where can_jump is set to false after a few frames of no foot collisions
-	can_jump = is_on_floor()
+	
+	if (can_jump and !is_on_floor() and coyote_count == 0): # Start coyote timer
+		coyote_count = coyote_frames
+		
+	if (coyote_count != 0):
+		coyote_count-=1
+	
+	can_jump = is_on_floor() and coyote_count == 0
 	
 	stuck_on_left_wall = (not is_on_floor()) and (ray_top_left_side.is_colliding() or ray_bottom_left_side.is_colliding())
 	stuck_on_right_wall = (not is_on_floor()) and (ray_top_right_side.is_colliding() or ray_bottom_right_side.is_colliding())
